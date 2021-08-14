@@ -1,47 +1,47 @@
-const FIREBASE_DOMAIN = "https://quote-f267f-default-rtdb.firebaseio.com";
+const FIREBASE_DOMAIN = "https://jokes-dfdf6-default-rtdb.firebaseio.com/";
 
-export async function getAllQuotes() {
-  const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`);
+export async function getAllJokes() {
+  const response = await fetch(`${FIREBASE_DOMAIN}/jokes.json`);
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not fetch quotes.");
+    throw new Error(data.message || "Could not fetch jokes.");
   }
 
-  const transformedQuotes = [];
+  const transformedJokes = [];
 
   for (const key in data) {
-    const quoteObj = {
+    const jokeObj = {
       id: key,
       ...data[key],
     };
 
-    transformedQuotes.push(quoteObj);
+    transformedJokes.push(jokeObj);
   }
 
-  return transformedQuotes;
+  return transformedJokes;
 }
 
-export async function getSingleQuote(quoteId) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/quotes/${quoteId}.json`);
+export async function getSingleJoke(jokeId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/jokes/${jokeId}.json`);
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not fetch quote.");
+    throw new Error(data.message || "Could not fetch joke.");
   }
 
-  const loadedQuote = {
-    id: quoteId,
+  const loadedJoke = {
+    id: jokeId,
     ...data,
   };
 
-  return loadedQuote;
+  return loadedJoke;
 }
 
-export async function addQuote(quoteData) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`, {
+export async function addJoke(JokeData) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/jokes.json`, {
     method: "POST",
-    body: JSON.stringify(quoteData),
+    body: JSON.stringify(JokeData),
     headers: {
       "Content-Type": "application/json",
     },
@@ -49,7 +49,7 @@ export async function addQuote(quoteData) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not create quote.");
+    throw new Error(data.message || "Could not create joke.");
   }
 
   return null;
@@ -57,7 +57,7 @@ export async function addQuote(quoteData) {
 
 export async function addComment(requestData) {
   const response = await fetch(
-    `${FIREBASE_DOMAIN}/comments/${requestData.quoteId}.json`,
+    `${FIREBASE_DOMAIN}/comments/${requestData.jokeId}.json`,
     {
       method: "POST",
       body: JSON.stringify(requestData.commentData),
@@ -75,8 +75,8 @@ export async function addComment(requestData) {
   return { commentId: data.name };
 }
 
-export async function getAllComments(quoteId) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/comments/${quoteId}.json`);
+export async function getAllComments(jokeId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/comments/${jokeId}.json`);
 
   const data = await response.json();
 

@@ -1,20 +1,20 @@
-import classes from './QuoteItem.module.css';
+import classes from './JokeItem.module.css';
 import {Link} from 'react-router-dom';
 
-const QuoteItem = (props) => {
+const JokeItem = (props) => {
   return (
     <li className={classes.item}>
       <figure>
-        <blockquote>
+        <blockjoke>
           <p>{props.text}</p>
-        </blockquote>
+        </blockjoke>
         <figcaption>{props.author}</figcaption>
       </figure>
-      <Link className='btn' to={`/quotes/${props.id}`}>
+      <Link className='btn' to={`/jokes/${props.id}`}>
         View Fullscreen
       </Link>
     </li>
   );
 };
 
-export default QuoteItem;
+export default JokeItem;

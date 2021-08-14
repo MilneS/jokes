@@ -1,18 +1,18 @@
 import { useEffect } from "react";
-import QuoteList from "../components/quotes/QuoteList";
+import JokeList from "../components/jokes/JokeList";
 import useHttp from "../hooks/use-http";
-import { getAllQuotes } from "../lib/api";
+import { getAllJokes } from "../lib/api";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
-import NoQuotesFound from '../components/quotes/NoQuotesFound';
+import NoJokesFound from '../components/jokes/NoJokesFound';
 
 
-const AllQuotes = () => {
+const AllJokes = () => {
   const {
     sendRequest,
     status,
-    data: loadedQuotes,
+    data: loadedJokes,
     error,
-  } = useHttp(getAllQuotes, true);
+  } = useHttp(getAllJokes, true);
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
@@ -27,11 +27,11 @@ const AllQuotes = () => {
   if (error) {
     return <p className="centered focused">{error}</p>;
   }
-  if (status === "completed" && (!loadedQuotes || loadedQuotes.length === 0)) {
-    return <NoQuotesFound />;
+  if (status === "completed" && (!loadedJokes || loadedJokes.length === 0)) {
+    return <NoJokesFound />;
   }
 
-  return <QuoteList quotes={loadedQuotes} />;
+  return <JokeList jokes={loadedJokes} />;
 };
 
-export default AllQuotes;
+export default AllJokes;

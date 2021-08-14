@@ -3,9 +3,9 @@ import { Prompt } from "react-router-dom";
 
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import classes from "./QuoteForm.module.css";
+import classes from "./JokeForm.module.css";
 
-const QuoteForm = (props) => {
+const JokeForm = (props) => {
   const [isEntering, setIsEntering] = useState(false);
   const authorInputRef = useRef();
   const textInputRef = useRef();
@@ -18,7 +18,7 @@ const QuoteForm = (props) => {
 
     // optional: Could validate here
 
-    props.onAddQuote({ author: enteredAuthor, text: enteredText });
+    props.onAddJoke({ author: enteredAuthor, text: enteredText });
   }
 
   const finishEnteringHandler = () => {
@@ -59,7 +59,7 @@ const QuoteForm = (props) => {
           </div>
           <div className={classes.actions}>
             <button onClick={finishEnteringHandler} className="btn">
-              Add Quote
+              Add Joke
             </button>
           </div>
         </form>
@@ -68,4 +68,4 @@ const QuoteForm = (props) => {
   );
 };
 
-export default QuoteForm;
+export default JokeForm;

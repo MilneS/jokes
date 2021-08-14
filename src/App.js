@@ -1,14 +1,14 @@
-// https://quote-f267f.web.app
+
 
 import React, { Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 
-const NewQuote = React.lazy(() => import("./pages/NewQuote"));
-const QuoteDetail = React.lazy(() => import("./pages/QuoteDetail"));
+const NewJoke = React.lazy(() => import("./pages/NewJoke"));
+const JokeDetail = React.lazy(() => import("./pages/JokeDetail"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
-const AllQuotes = React.lazy(() => import("./pages/AllQuotes"));
+const AllJokes = React.lazy(() => import("./pages/AllJokes"));
 
 function App() {
   return (
@@ -22,16 +22,16 @@ function App() {
       >
         <Switch>
           <Route path="/" exact>
-            <Redirect to="/quotes" />
+            <Redirect to="/jokes" />
           </Route>
-          <Route path="/quotes" exact>
-            <AllQuotes />
+          <Route path="/jokes" exact>
+            <AllJokes />
           </Route>
-          <Route path="/quotes/:quoteId">
-            <QuoteDetail />
+          <Route path="/jokes/:jokeId">
+            <JokeDetail />
           </Route>
-          <Route path="/new-quote">
-            <NewQuote />
+          <Route path="/new-joke">
+            <NewJoke />
           </Route>
           <Route path="*">
             <NotFound />

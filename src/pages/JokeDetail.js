@@ -1,26 +1,26 @@
 import { Fragment, useEffect } from "react";
 import { useParams, Route, Link, useRouteMatch } from "react-router-dom";
 import Comments from "../components/comments/Comments";
-import HighlightedQuote from "../components/quotes/HighlightedQuote";
+import HighlightedJoke from "../components/jokes/HighlightedJoke";
 import useHttp from "../hooks/use-http";
-import { getSingleQuote } from "../lib/api";
+import { getSingleJoke } from "../lib/api";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 
-const QuoteDetail = () => {
+const JokeDetail = () => {
   const match = useRouteMatch();
   const params = useParams();
-  const {quoteId}= params;
+  const {jokeId}= params;
   
   const {
     sendRequest,
     status,
-    data: loadedQuote,
+    data: loadedJoke,
     error,
-  } = useHttp(getSingleQuote, true);
+  } = useHttp(getSingleJoke, true);
 
   useEffect(() => {
-    sendRequest(quoteId);
-  }, [sendRequest, quoteId]);
+    sendRequest(jokeId);
+  }, [sendRequest, jokeId]);
 
   if (status === "pending") {
     return (
@@ -33,13 +33,13 @@ const QuoteDetail = () => {
   if (error) {
     return <p className="centered">{error}</p>;
   }
-  if (!loadedQuote.text) {
-    return <p>No quote found!</p>
+  if (!loadedJoke.text) {
+    return <p>No joke found!</p>
   }
 
   return (
     <Fragment>
-      <HighlightedQuote text={loadedQuote.text} author={loadedQuote.author} />
+      <HighlightedJoke text={loadedJoke.text} author={loadedJoke.author} />
       <Route path={match.path} exact>
         <div className="centered">
           <Link className="btn--flat" to={`${match.url}/comments`}>
@@ -54,4 +54,4 @@ const QuoteDetail = () => {
   );
 };
 
-export default QuoteDetail;
+export default JokeDetail;

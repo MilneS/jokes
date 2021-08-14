@@ -5,11 +5,11 @@ const MainNavigation = () => {
 
     return (
         <header className={classes.header}>
-            <NavLink className={classes.logo} to="/quotes">Great Quotes</NavLink>
+            <NavLink className={classes.logo} to="/jokes">Great jokes</NavLink>
             <nav className={classes.nav}>
                 <ul>
-                    <li><NavLink to='/quotes' activeClassName={classes.active}>All Quotes</NavLink></li>
-                    <li><NavLink to='/new-quote' activeClassName={classes.active}>Add a Quote</NavLink></li>
+                    <li><NavLink to='/jokes' activeClassName={classes.active}>All jokes</NavLink></li>
+                    <li><NavLink to='/new-joke' activeClassName={classes.active}>Add a joke</NavLink></li>
                 </ul>
             </nav>
         </header>
